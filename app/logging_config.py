@@ -1,92 +1,24 @@
 import logging
-from logging.handlers import RotatingFileHandler
-
-from app.config import LOG_FILE, LOG_LEVEL
-
-
-# ============================================================
-# LOG FORMAT
-# ============================================================
-
-LOG_FORMAT = (
-    "%(asctime)s | "
-    "%(levelname)s | "
-    "%(name)s | "
-    "%(message)s"
-)
-
-
-# ============================================================
-# CONFIGURE LOGGING
-# ============================================================
+from app.config import LOG_DIR, LOG_FILE, LOG_LEVEL
 
 def setup_logging():
+    LOG_DIR.mkdir(parents=True, exist_ok=True)
 
-    log_level = getattr(
-        logging,
-        LOG_LEVEL,
-        logging.INFO
-    )
-
-
-    # --------------------------------------------------------
-    # FILE HANDLER
-    # --------------------------------------------------------
-
-    file_handler = RotatingFileHandler(
-        LOG_FILE,
-        maxBytes=5 * 1024 * 1024,
-        backupCount=3,
-        encoding="utf-8"
-    )
-
-
-    # --------------------------------------------------------
-    # CONSOLE HANDLER
-    # --------------------------------------------------------
-
-    console_handler = logging.StreamHandler()
-
-
-    # --------------------------------------------------------
-    # FORMATTER
-    # --------------------------------------------------------
-
-    formatter = logging.Formatter(
-        LOG_FORMAT
-    )
-
-
-    file_handler.setFormatter(
-        formatter
-    )
-
-    console_handler.setFormatter(
-        formatter
-    )
-
-
-    # --------------------------------------------------------
-    # ROOT LOGGER
-    # --------------------------------------------------------
+    log_format = "%(asctime)s | %(levelname)s | %(name)s | %(message)s"
+    formatter = logging.Formatter(log_format)
 
     root_logger = logging.getLogger()
+    root_logger.setLevel(LOG_LEVEL)
 
-    root_logger.setLevel(
-        log_level
-    )
+    if root_logger.hasHandlers():
+        root_logger.handlers.clear()
 
+    # Console output
+    console_handler = logging.StreamHandler()
+    console_handler.setFormatter(formatter)
+    root_logger.addHandler(console_handler)
 
-    # --------------------------------------------------------
-    # PREVENT DUPLICATE HANDLERS
-    # --------------------------------------------------------
-
-    if not root_logger.handlers:
-
-        root_logger.addHandler(
-            file_handler
-        )
-
-        root_logger.addHandler(
-            console_handler
-        )
+    # File output
+    file_handler = logging.FileHandler(LOG_FILE, encoding="utf-8")
+    file_handler.setFormatter(formatter)
+    root_logger.addHandler(file_handler)
