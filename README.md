@@ -1,49 +1,70 @@
 # Customer Churn Prediction & Retention Analytics System
 
-## Project Overview
+An end-to-end Machine Learning Engineering project for predicting customer churn using XGBoost, FastAPI, Streamlit, Docker, and Docker Compose.
 
-An end-to-end Machine Learning project that predicts whether a telecom customer is likely to churn based on customer, service, and account information.
+## Project Status
 
-## Problem Type
+Complete.
 
-- Learning Type: Supervised Learning
-- ML Task: Binary Classification
-- Target Variable: Churn
-
-## Objective
-
-The objective is to build a complete Machine Learning workflow starting from raw data and EDA through model training, evaluation, API development, dashboard creation, testing, and deployment.
-
-## Planned Workflow
-
-1. Problem Definition
-2. Dataset Acquisition
-3. Data Understanding
-4. Exploratory Data Analysis
-5. Data Cleaning
-6. Feature Engineering
-7. Model Training
-8. Model Evaluation
-9. Model Explainability
-10. FastAPI Backend
-11. Streamlit Dashboard
-12. Testing
-13. Deployment
-14. Documentation
-
-## Technology Stack
+## Tech Stack
 
 - Python
-- NumPy
 - Pandas
-- Matplotlib
-- Seaborn
+- NumPy
 - Scikit-learn
 - XGBoost
 - FastAPI
 - Streamlit
-- Git
-- GitHub
+- Docker
+- Docker Compose
+- Git/GitHub
 
+## Architecture
 
+Customer Data  
+↓  
+Data Preprocessing  
+↓  
+Feature Engineering  
+↓  
+ML Model  
+↓  
+FastAPI  
+↓  
+Streamlit Dashboard
 
+## Machine Learning
+
+Models explored:
+
+- Dummy Baseline
+- Logistic Regression
+- Random Forest
+- XGBoost
+
+The final system uses a tuned XGBoost model for churn prediction.
+
+## Features
+
+- Data preprocessing
+- Exploratory Data Analysis
+- Feature engineering
+- Model comparison
+- Hyperparameter tuning
+- Model evaluation
+- Probability-based churn prediction
+- Risk classification
+- FastAPI REST API
+- Streamlit dashboard
+- Automated tests
+- Logging
+- Configuration management
+- Docker containerization
+- Docker Compose
+
+## Running the Application
+
+### Docker Compose
+
+```bash
+docker compose up --build
