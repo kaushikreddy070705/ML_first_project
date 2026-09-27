@@ -1,15 +1,21 @@
-# Virtual environment
-.venv/
+# Environment
+.env
+
+# Logs
+logs/
+*.log
 
 # Python
 __pycache__/
 *.py[cod]
 
+# Virtual environment
+.venv/
+venv/
+env/
+
 # Jupyter
 .ipynb_checkpoints/
-
-# Environment variables
-.env
 
 # Testing
 .pytest_cache/
@@ -20,18 +26,6 @@ htmlcov/
 .vscode/
 .idea/
 
-# Logs
-*.log
-
-# OS files
+# OS
 .DS_Store
 Thumbs.db
-
-# Large/local data
-data/raw/*
-data/processed/*
-
-# Model artifacts
-models/*.joblib
-models/*.pkl
-models/*.pickle

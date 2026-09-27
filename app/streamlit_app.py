@@ -1,8 +1,13 @@
+import os
 import requests
 import streamlit as st
 import plotly.graph_objects as go
 
 
+API_URL = os.getenv(
+    "API_URL",
+    "http://127.0.0.1:8000"
+)
 # ============================================================
 # PAGE CONFIGURATION
 # ============================================================

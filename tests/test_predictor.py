@@ -1,6 +1,7 @@
 from pathlib import Path
 import joblib
-from app.predictor import predict_churn
+from app.predictor import predict_churn, get_risk_level
+
 
 
 # ============================================================
@@ -142,3 +143,23 @@ def test_risk_level_is_valid():
     result = predict_churn(customer)
 
     assert result["risk_level"] in ["Low", "Medium", "High"]
+
+def get_risk_level(probability):
+    if probability >= 0.70:
+        return "High"
+
+    if probability >= 0.40:
+        return "Medium"
+
+    return "Low"
+
+def test_risk_level_boundaries():
+
+    assert get_risk_level(0.10) == "Low"
+    assert get_risk_level(0.39) == "Low"
+
+    assert get_risk_level(0.40) == "Medium"
+    assert get_risk_level(0.69) == "Medium"
+
+    assert get_risk_level(0.70) == "High"
+    assert get_risk_level(0.95) == "High"
